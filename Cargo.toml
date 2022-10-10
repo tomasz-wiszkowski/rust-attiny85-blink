@@ -1,0 +1,19 @@
+[package]
+name = "attiny85-blink"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+panic-halt = "0.2.0"
+[dependencies.avrd]
+git = "https://github.com/avr-rust/avrd.git"
+branch = "master"
+features = ["all-mcus"]
+[dependencies.arduino-hal]
+git = "https://github.com/Rahix/avr-hal"
+branch = "main"
+features = ["arduino-uno"]
+[profile.release]
+lto = true
+panic = "abort"  # fixes eh_personality
+
