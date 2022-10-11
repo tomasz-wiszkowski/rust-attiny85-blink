@@ -7,7 +7,7 @@ name = "arduino-hal"
 version = "0.1.0"
 source = "git+https://github.com/Rahix/avr-hal?branch=main#e1e16f03143e942094540f1134aa999b4a7350c1"
 dependencies = [
- "atmega-hal",
+ "attiny-hal",
  "avr-device",
  "avr-hal-generic",
  "cfg-if 1.0.0",
@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "atmega-hal"
+name = "attiny-hal"
 version = "0.1.0"
 source = "git+https://github.com/Rahix/avr-hal?branch=main#e1e16f03143e942094540f1134aa999b4a7350c1"
 dependencies = [

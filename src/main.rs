@@ -1,10 +1,7 @@
 #![no_std]
 #![no_main]
-#![feature(core_intrinsics)]
 
 extern crate panic_halt;
-use avrd::current::*;
-use core::intrinsics::volatile_store;
 
 #[arduino_hal::entry]
 fn main() -> ! {
@@ -15,25 +12,17 @@ fn main() -> ! {
         53, 44, 37, 29, 23, 17, 12, 8, 4, 2, 0, 0, 0, 2, 4, 8, 12, 17, 23, 29, 37, 44, 53, 62, 71,
         80, 90,
     ];
-
-    // All bits are outputs.
-    unsafe {
-        volatile_store(DDRB, 0x1f);
-    }
+    let peripherals = arduino_hal::Peripherals::take().unwrap();
+    let pins = arduino_hal::pins!(peripherals);
+    let mut led = pins.d1.into_output();
 
     loop {
         points.iter().for_each(|p| {
             (0..100).for_each(|_| {
-                // Set all pins low.
-                unsafe {
-                    volatile_store(PORTB, 0);
-                }
+                led.set_low();
                 arduino_hal::delay_us((*p).into());
 
-                // Set all pins high.
-                unsafe {
-                    volatile_store(PORTB, 0x1f);
-                }
+                led.set_high();
                 arduino_hal::delay_us((200 - p).into());
             });
         });

@@ -12,7 +12,7 @@ features = ["all-mcus"]
 [dependencies.arduino-hal]
 git = "https://github.com/Rahix/avr-hal"
 branch = "main"
-features = ["arduino-uno"]
+features = ["trinket"]  # This is the attiny.
 [profile.release]
 lto = true
 panic = "abort"  # fixes eh_personality
